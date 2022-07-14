@@ -1,14 +1,11 @@
 const express = require("express");
 
 const projectRouter = express.Router();
-
-const upload = require("../multerSetup");
+const multer = require("multer");
+const { upload } = require("../multerSetup");
 
 const routeControl = require("../controllers/maarRouteController");
 
-const getIndex = (req, res) => {
-  res.send("INdex");
-};
 projectRouter.route("/").get(routeControl.getAll).post(routeControl.upload);
 
 projectRouter.route("/create").post(routeControl.createNew);

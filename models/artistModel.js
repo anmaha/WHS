@@ -11,7 +11,8 @@ const mongoose = require("mongoose");
 // });
 
 const artist = new mongoose.Schema({
-  artistName: { type: String },
+  firstName: { type: String },
+  lastName: { type: String },
   images: {
     type: Array,
     default: [
@@ -29,4 +30,4 @@ const artist = new mongoose.Schema({
 });
 const Artist = mongoose.model("Artist", artist);
 
-module.export = Artist;
+module.exports = Artist;

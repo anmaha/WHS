@@ -1,5 +1,7 @@
 const fs = require("fs");
 
+const { multi_upload } = require("../multerSetup");
+
 const Artist = require("../models/artistModel");
 
 exports.getAll = async (req, res) => {
@@ -19,24 +21,27 @@ exports.getAll = async (req, res) => {
 };
 
 exports.upload = async (req, res) => {
-  const img = fs.readFileSync(req.file.path);
-  const encodedImage = Buffer.from(img, "base64");
-  console.log("Encoded Image", encodedImage);
-  const encodedImageData = {
-    data: encodedImage,
-    contentType: req.file.mimetype,
-  };
-  const response = await Artist.findByIdandUpdate(
-    req.query.userId,
-    { image: encodedImageData },
-    { new: true }
-  );
-  res.send(response);
+  console.log(req.body);
+  console.log(req.file);
+
+  //   const img = fs.readFileSync(req.file.path);
+  //   const encodedImage = Buffer.from(img, "base64");
+  //   console.log("Encoded Image", encodedImage);
+  //   const encodedImageData = {
+  //     data: encodedImage,
+  //     contentType: req.file.mimetype,
+  //   };
+  //   const response = await Artist.findByIdandUpdate(
+  //     req.query.userId,
+  //     { image: encodedImageData },
+  //     { new: true }
+  //   );
+  //   res.send(response);
 };
 
 exports.createNew = async (req, res) => {
   try {
-    //const newArtwork = Artist.create(req.body);
+    const newArtwork = await Artist.create(req.body);
     console.log("Create new function", req.body);
 
     res.status(201).json({
@@ -49,7 +54,12 @@ exports.createNew = async (req, res) => {
       message: error.message,
     });
   }
-};
+  //   multi_upload(req, res, (error) => {
+  //     console.log("files:", req.files);
+  //   });
+
+  //
+};;
 
 exports.getWun = async (req, res) => {
   try {
