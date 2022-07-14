@@ -1,49 +1,106 @@
-const Artwork = require("../models/artworkModel");
+const fs = require("fs");
+
+const Artist = require("../models/artistModel");
 
 exports.getAll = async (req, res) => {
-    try {
-    const Artworks = await Artwork.find();
-    res.status(200).json({
-        status: "success",
-        message: { Artworks },
+  try {
+    const Artist = await Artist.findById(req.query.artistName);
+    res.send(Artist.images);
+    // res.status(200).json({
+    //   status: "success",
+    //   data: { images: Artist.images },
+    // });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      message: error.message,
     });
-    } catch (error) {
-        res.status(500).json({
-            status: "Error",
-            message: error.message,
-        });   
-     }   
+  }
+};
+
+exports.upload = async (req, res) => {
+  const img = fs.readFileSync(req.file.path);
+  const encodedImage = Buffer.from(img, "base64");
+  console.log("Encoded Image", encodedImage);
+  const encodedImageData = {
+    data: encodedImage,
+    contentType: req.file.mimetype,
+  };
+  const response = await Artist.findByIdandUpdate(
+    req.query.userId,
+    { image: encodedImageData },
+    { new: true }
+  );
+  res.send(response);
 };
 
 exports.createNew = async (req, res) => {
-    try{
-        const newArtwork = Artwork.create(req.body);
+  try {
+    //const newArtwork = Artist.create(req.body);
+    console.log("Create new function", req.body);
 
-        res.status(201).json({
-            status: "Create New Success",
-            data: { newArtwork },
-        });
-    }catch(error){
-        res.status(500).json({
-            status: "Error create new",
-            message: error.message,
-        });
-    }
+    res.status(201).json({
+      status: "Create New Success",
+      data: { newArtwork },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error create new",
+      message: error.message,
+    });
+  }
 };
 
 exports.getWun = async (req, res) => {
-    try{
-        const wunArtwork = Artwork.findById(req.params.id);
-        res.status(200).json({
-            status: "getWun Success",
-            data: { wunArtwork },
+  try {
+    const wunArtwork = Artist.findById(req.params.id);
+    res.status(200).json({
+      status: "getWun Success",
+      data: { wunArtwork },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error getWun",
+      message: error.message,
+    });
+  }
+};
 
-        });
-    }catch(error){
-        res.status(500).json({
-            status: "Error getWun",
-            message: error.message,
-        })
-    }
+exports.updateWun = async (req, res) => {
+  try {
+    const wunArtwork = Artist.findByIdandUpdate(req.params.id, req.body);
+    res.status(200).json({
+      status: "updateWun Success",
+      data: { wunArtwork },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Error getWun",
+      message: error.message,
+    });
+  }
+};
 
+exports.deleteArtwork = async (req, res) => {
+  try {
+    let delData = await dataObject.findById(req.params.id);
+    await dataObject.findByIdAndDelete(req.params.id);
+
+    // res.redirect("/");
+    response.status(200).json({
+      status: "success",
+
+      data: {
+        deletedData: delData,
+        message: "passed deleteObject Entry Deleted",
+      },
+    });
+  } catch (error) {
+    response.status(500).json({
+      status: "fail",
+      data: {
+        message: "Failed deleteObject",
+      },
+    });
+  }
 };
