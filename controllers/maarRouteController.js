@@ -6,8 +6,8 @@ const Artist = require("../models/artistModel");
 
 exports.getAll = async (req, res) => {
   try {
-    const Artist = await Artist.findById(req.query.artistName);
-    res.send(Artist.images);
+    const Artist = await Artist.find();
+    res.send(Artist);
     // res.status(200).json({
     //   status: "success",
     //   data: { images: Artist.images },
