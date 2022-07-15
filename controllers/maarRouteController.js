@@ -6,8 +6,9 @@ const { Artist } = require("../models/artistModel");
 
 exports.getAll = async (req, res) => {
   try {
-    const artists = await Artist.find({});
-    res.send(artists);
+    console.log(req.query);
+    const artist = await Artist.findOne({ lastName: req.query.lastName });
+    res.send(artist);
     // res.status(200).json({
     //   status: "success",
     //   data: { images: Artist.images },
@@ -21,22 +22,26 @@ exports.getAll = async (req, res) => {
 };
 
 exports.upload = async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
+  //   console.log("body", req.body);
+  //   console.log("file", req.file);
+  //   console.log("query", req.query);
 
-  //   const img = fs.readFileSync(req.file.path);
-  //   const encodedImage = Buffer.from(img, "base64");
-  //   console.log("Encoded Image", encodedImage);
-  //   const encodedImageData = {
-  //     data: encodedImage,
-  //     contentType: req.file.mimetype,
-  //   };
-  //   const response = await Artist.findByIdandUpdate(
-  //     req.query.userId,
-  //     { image: encodedImageData },
-  //     { new: true }
-  //   );
-  //   res.send(response);
+  const img = fs.readFileSync(req.file.path);
+  const encodedImage = Buffer.from(img, "base64");
+  console.log("Encoded Image", encodedImage);
+  const encodedImageData = {
+    data: encodedImage,
+    contentType: req.file.mimetype,
+  };
+  const artist = await Artist.findById(req.query.artistId);
+  const images = artist.images;
+  images.push(encodedImageData);
+  const updatedArtist = await Artist.findByIdAndUpdate(
+    req.query.artistId,
+    { images: images },
+    { new: true }
+  );
+  res.send(updatedArtist);
 };
 
 exports.createNew = async (req, res) => {
