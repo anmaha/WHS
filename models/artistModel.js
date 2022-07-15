@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
-// const artworkModel = new mongoose.Schema({
-//   artist: { type: String },
-//   title: { type: String },
-//   date: { type: String },
-//   media: { type: String },
-//   size: { type: String },
-//   description: { type: String },
-//   //image: { data: Buffer, contentType: String },
-// });
+const artworkModel = new mongoose.Schema({
+  artist: {
+    firstName: String,
+    lastName: String,
+  },
+  title: { type: String },
+  date: { type: String },
+  media: { type: String },
+  size: { type: String },
+  description: { type: String },
+  //image: { data: Buffer, contentType: String },
+});
 
 const artist = new mongoose.Schema({
   firstName: { type: String },
