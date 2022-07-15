@@ -2,12 +2,12 @@ const fs = require("fs");
 
 const { multi_upload } = require("../multerSetup");
 
-const Artist = require("../models/artistModel");
+const { Artist } = require("../models/artistModel");
 
 exports.getAll = async (req, res) => {
   try {
-    const Artist = await Artist.find();
-    res.send(Artist);
+    const artists = await Artist.find({});
+    res.send(artists);
     // res.status(200).json({
     //   status: "success",
     //   data: { images: Artist.images },
