@@ -10,7 +10,7 @@ const artworkModel = new mongoose.Schema({
   media: { type: String },
   size: { type: String },
   description: { type: String },
-  //image: { data: Buffer, contentType: String },
+  image: { data: Buffer, contentType: String },
 });
 
 const artist = new mongoose.Schema({
@@ -33,4 +33,6 @@ const artist = new mongoose.Schema({
 });
 const Artist = mongoose.model("Artist", artist);
 
-module.exports = Artist;
+const Artwork = mongoose.model("Artwork", artworkModel);
+
+module.exports = { Artist, Artwork };
