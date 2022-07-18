@@ -21,6 +21,64 @@ exports.getAll = async (req, res) => {
   }
 };
 
+exports.addArtwork = async (req, res) => {
+  const img = fs.readFileSync(req.file.path);
+  const encodedImage = Buffer.from(img, "base64");
+
+  const artwork = {
+    id: req.query.artworkId,
+    data: encodedImage,
+    contentType: req.file.mimetype,
+    ...req.body,
+  };
+  const artist = Artist.findById(req.query.artistId);
+  const newArtworks = [...artist.artworks, artwork];
+  await Artist.findByIdAndUpdate(
+    req.query.artistId,
+    { artworks: newArtworks },
+    { new: true }
+  );
+};
+
+exports.updateExistingArtwork = async (req, res) => {
+  let img = null;
+  let encodedImage = null;
+  let mimetype = null;
+
+  const artist = Artist.findById(req.query.artistId);
+  const artworkToEdit = artist.images[req.query.artworkIndex];
+
+  if (req.file) {
+    img = fs.readFileSync(req.file.path);
+    encodedImage = Buffer.from(img, "base64");
+    mimetype = req.file.mimetype;
+  } else {
+    encodedImage = artworkToEdit.data;
+    mimetype = artworkToEdit.contentType;
+  }
+
+  const artwork = {
+    data: encodedImage,
+    contentType: req.file.mimetype,
+    ...req.body,
+  };
+
+  const modifiedArtwork = { ...artworkToEdit, ...artwork };
+  const newArtworks = [
+    ...artist.images.slice(0, req.query.artworkIndex),
+    modifiedArtwork,
+    ...artist.images.slice(req.query.artworkIndex + 1),
+  ];
+
+  const updatedArtist = await Artist.findByIdAndUpdate(
+    req.query.artistId,
+    { artworks: newArtworks },
+    { new: true }
+  );
+
+  res.send(updatedArtist);
+};
+
 exports.upload = async (req, res) => {
   //   console.log("body", req.body);
   //   console.log("file", req.file);

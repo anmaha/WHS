@@ -11,6 +11,10 @@ projectRouter.route("/").get(routeControl.getAll).post(routeControl.upload);
 projectRouter.route("/create").post(routeControl.createNew);
 
 projectRouter
+  .route("/update")
+  .put(upload.single("file"), routeControl.updateExistingArtwork);
+
+projectRouter
   .route("/:id")
   .get(routeControl.getWun)
   .put(routeControl.updateWun)
