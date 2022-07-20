@@ -26,16 +26,15 @@ exports.addArtwork = async (req, res) => {
   const encodedImage = Buffer.from(img, "base64");
 
   const artwork = {
-    id: req.query.artworkId,
     data: encodedImage,
     contentType: req.file.mimetype,
     ...req.body,
   };
   const artist = Artist.findById(req.query.artistId);
-  const newArtworks = [...artist.artworks, artwork];
+  const newArtworks = [...artist.images, artwork];
   await Artist.findByIdAndUpdate(
     req.query.artistId,
-    { artworks: newArtworks },
+    { images: newArtworks },
     { new: true }
   );
 };
