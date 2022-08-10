@@ -30,40 +30,37 @@ const CardComponent = ({ image }) => {
 };
 
 const Images = ({ artist }) => {
-  //const location = useLocation();
-
   const [decodedImages, setDecodedImages] = useState([]);
 
+  const location = useLocation();
   const navigate = useNavigate();
-  const getAllImages = async () => {
-    //  const response = await axios.get(`/project?lastName=Hafer`);
-    //const { artist } = location.state;
+  const getAllImages = () => {
+    // const { artist } = location.state;
+    // const artistId = artist._id;
+    // console.log("artist", artist, "artistId", artistId);
 
-    const artistId = artist._id;
+    // let newDecodedImages = [];
+    // for (let i = 0; i < artist.images.length; i++) {
+    //   const image = artist.images[i];
 
-    console.log("artist", artist, "artistId", artistId);
-    let newDecodedImages = [];
-    for (let i = 0; i < artist.images.length; i++) {
-      const image = artist.images[i];
+    //   const decodedImage = {
+    //     ...image,
+    //     data: `data:${image.contentType};base64,${Buffer.from(
+    //       image.data,
+    //       "base64"
+    //     ).toString("base64")}`,
+    //   };
 
-      const decodedImage = {
-        ...image,
-        data: `data:${image.contentType};base64,${Buffer.from(
-          image.data,
-          "base64"
-        ).toString("base64")}`,
-      };
+    //   // console.log(
+    //   //   i,
+    //   //   "decodedImage properties ",
+    //   //   Object.getOwnPropertyNames(decodedImage)
+    //   // );
 
-      // console.log(
-      //   i,
-      //   "decodedImage properties ",
-      //   Object.getOwnPropertyNames(decodedImage)
-      // );
-
-      newDecodedImages = [...newDecodedImages, decodedImage];
-      console.log("for i=", i, "newDecodedImages", newDecodedImages);
-    }
-    setDecodedImages(newDecodedImages);
+    //   // newDecodedImages = [...newDecodedImages, decodedImage];
+    //   // console.log("for i=", i, "newDecodedImages", newDecodedImages);
+    // }
+    // setDecodedImages(newDecodedImages);
   };
 
   useEffect(() => {

@@ -29,6 +29,7 @@ const logoutUser = async (req, res) => {
 };
 
 const signupUser = async (req, res) => {
+  console.log(req.body);
   const artist = await Artist.findOne({ email: req.body.email });
   if (artist) {
     res.status(401).send("User already exists");
@@ -39,6 +40,7 @@ const signupUser = async (req, res) => {
       password: await bcrypt.hash(req.body.password, "password"),
     };
     const newArtist = await Artist.create(createdArtist);
+    console.log(newArtist);
     res.send(newArtist);
   }
 };

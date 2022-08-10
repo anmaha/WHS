@@ -9,35 +9,30 @@ const Signup = ({ credentials, handleOnSubmit, handleOnChange }) => {
           type="text"
           name="firstName"
           placeholder="First Name..."
-          value={credentials.lastName}
           onChange={handleOnChange}
         />
         <input
           type="text"
           name="LastName"
           placeholder="Last Name..."
-          value={credentials.lastName}
           onChange={handleOnChange}
         />
         <input
           type="text"
-          name="firstName"
+          name="userName"
           placeholder="User Name..."
-          value={credentials.userName}
           onChange={handleOnChange}
         />
         <input
           type="text"
           name="email"
           placeholder="Email..."
-          value={credentials.email}
           onChange={handleOnChange}
         />
         <input
           type="password"
           name="password"
           placeholder="Password..."
-          value={credentials.password}
           onChange={handleOnChange}
         />
         <input type="submit" value="Submit" />

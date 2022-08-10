@@ -16,14 +16,14 @@ const NavBar = ({ artist, setArtist }) => {
                     navData.isActive ? "active navLink" : "navLink"
                   }
                   to="/"
-                  // className={({ isActive }) => {
-                  //   isActive ? "navLink active" : "navLink";
-                  // }}
-                  // className={({ isActive }) => {
-                  //   isActive
-                  //     ? console.log("is active")
-                  //     : console.log("is not active");
-                  // }}
+                // className={({ isActive }) => {
+                //   isActive ? "navLink active" : "navLink";
+                // }}
+                // className={({ isActive }) => {
+                //   isActive
+                //     ? console.log("is active")
+                //     : console.log("is not active");
+                // }}
                 >
                   Artwork
                 </NavLink>
@@ -65,16 +65,20 @@ const NavBar = ({ artist, setArtist }) => {
                   Login
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  state={{ artist, setArtist }}
-                  className={({ isActive }) =>
-                    isActive ? "active navLink" : "navLink"
-                  }
-                  to="/addnewart">
-                  Add Art
-                </NavLink>
-              </li>
+              {
+                artist ? (
+                  <li>
+                    <NavLink
+                      state={{ artist, setArtist }}
+                      className={({ isActive }) =>
+                        isActive ? "active navLink" : "navLink"
+                      }
+                      to="/addnewart">
+                      Add Art
+                    </NavLink>
+                  </li>)
+                  : null
+              }
             </ul>
           </nav>
         </div>

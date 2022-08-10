@@ -40,6 +40,8 @@ projectRouter
     );
   });
 
+projectRouter.route("/allimages").get(routeControl.getAllImages);
+
 projectRouter.route("/login").post(loginUser);
 projectRouter.route("/signup").post(signupUser);
 

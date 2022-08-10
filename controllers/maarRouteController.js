@@ -21,6 +21,25 @@ exports.getAll = async (req, res) => {
   }
 };
 
+exports.getAllImages = async (req, res) => {
+  try {
+    const artists = await Artist.find({});
+    const sanitizedArtists = artists.map((artist) => {
+      return {
+        firstName: artist.firstName,
+        lastName: artist.lastName,
+        images: artist.images
+      }
+    });
+    res.send(sanitizedArtists);
+  } catch (error) {
+    res.status(500).json({
+      status: "Error",
+      message: error.message,
+    });
+  }
+}
+
 exports.addArtwork = async (req, res) => {
   const img = fs.readFileSync(req.file.path);
   const encodedImage = Buffer.from(img, "base64");
@@ -119,11 +138,6 @@ exports.createNew = async (req, res) => {
       message: error.message,
     });
   }
-  //   multi_upload(req, res, (error) => {
-  //     console.log("files:", req.files);
-  //   });
-
-  //
 };;
 
 exports.getWun = async (req, res) => {

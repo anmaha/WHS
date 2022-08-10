@@ -29,6 +29,7 @@ const Authentication = () => {
   };
 
   const handleSumbit = async () => {
+    console.trace();
     if (authenticationState === AuthenticationState.Login) {
       const response = await axios.post("project/login", credentials);
       const { artist } = response.data;
@@ -48,6 +49,7 @@ const Authentication = () => {
     newCredentials[name] = value;
     setCredentials(newCredentials);
   };
+
   return (
     <div>
       {authenticationState === AuthenticationState.Login ? (
