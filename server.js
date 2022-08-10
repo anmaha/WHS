@@ -10,5 +10,7 @@ mongoose.connect(process.env.DATABASE, {
     .then(()=>{
         console.log("Connected to mongoDB", process.env.DATABASE);
     });
-
-app.listen(process.env.PORT, ()=>{console.log(`Listening at port: ${process.env.PORT}`)} );
+ 
+app.listen(process.env.PORT, () => {
+  console.log(`Listening at port: ${process.env.PORT}`);
+}); 

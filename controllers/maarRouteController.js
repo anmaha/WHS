@@ -30,13 +30,16 @@ exports.addArtwork = async (req, res) => {
     contentType: req.file.mimetype,
     ...req.body,
   };
-  const artist = Artist.findById(req.query.artistId);
-  const newArtworks = [...artist.images, artwork];
-  await Artist.findByIdAndUpdate(
+  const artist = await Artist.findById(req.query.artistId);
+  // const newArtworks = [...artist.images, artwork];
+  artist.images.push(artwork);
+  const updatedArtist = await Artist.findByIdAndUpdate(
     req.query.artistId,
-    { images: newArtworks },
+    { images: artist.images },
     { new: true }
   );
+  console.log("UpdatedArtist", updatedArtist);
+  res.send(updatedArtist);
 };
 
 exports.updateExistingArtwork = async (req, res) => {
@@ -71,7 +74,7 @@ exports.updateExistingArtwork = async (req, res) => {
 
   const updatedArtist = await Artist.findByIdAndUpdate(
     req.query.artistId,
-    { artworks: newArtworks },
+    { images: newArtworks },
     { new: true }
   );
 

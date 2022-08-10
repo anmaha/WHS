@@ -5,10 +5,13 @@ const multer = require("multer");
 const { upload } = require("../multerSetup");
 
 const routeControl = require("../controllers/maarRouteController");
+const { loginUser, signupUser } = require("../controllers/authController");
 
 projectRouter.route("/").get(routeControl.getAll).post(routeControl.upload);
 
-projectRouter.route("/create").post(routeControl.createNew);
+projectRouter
+  .route("/create")
+  .post(upload.single("file"), routeControl.addArtwork);
 
 projectRouter
   .route("/update")
@@ -36,5 +39,8 @@ projectRouter
       ).toString("base64")}`
     );
   });
+
+projectRouter.route("/login").post(loginUser);
+projectRouter.route("/signup").post(signupUser);
 
 module.exports = projectRouter;

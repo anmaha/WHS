@@ -14,6 +14,9 @@ const artworkModel = new mongoose.Schema({
 });
 
 const artist = new mongoose.Schema({
+  userName: { type: String },
+  password: { type: String },
+  email: { type: String },
   firstName: { type: String },
   lastName: { type: String },
   images: {
@@ -31,8 +34,8 @@ const artist = new mongoose.Schema({
     ],
   },
 });
-const Artist = mongoose.model("Artist", artist);
+const Artist = mongoose.model("ArtistDB", artist);
 
-const Artwork = mongoose.model("Artwork", artworkModel);
+//const Artwork = mongoose.model("Artwork", artworkModel);
 
-module.exports = { Artist, Artwork };
+module.exports = { Artist };
