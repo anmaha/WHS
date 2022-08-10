@@ -1,0 +1,118 @@
+.root{
+    color: #333;
+    background-color: #fafafa;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.3em;
+    letter-spacing: .66px;
+    margin: 0;
+    display: block;
+
+}
+.canvas{
+    padding: 25px;
+}
+
+
+.header{
+  display: flex; 
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+h1{
+  /* font-size:clamp(1.2rem, 10vmin, 3.5rem);
+  font-family: Avenir, sans-serif;
+  line-height: 1em;
+  font-weight: 400;
+   text-align: center; 
+  margin-block-start: 0;
+  margin-block-end: 0; */
+}
+
+header {
+    background: transparent;
+    min-height: 8vmin;
+    padding: 0 0 50px 0;
+}
+
+.header h1{
+  /* font-size: 24px; */
+  padding: 0; 
+  margin: 0;
+  align-self: center;
+
+    
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+    line-height: 1em;
+    -webkit-transition: color .5s ease-out;
+    -moz-transition: color .5s ease-out;
+    -o-transition: color .5s ease-out;
+    transition: color .5s ease-out;
+}
+
+.navBar ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    margin: 0;
+    
+}
+
+.navBar ul li{
+    list-style: none;
+    line-height: 1.5em;
+    margin: 0 0.5rem;
+}
+
+.navLink {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+}
+
+.navLink::after {
+    content: "";
+    display: block;
+    height: 2px;
+    position: relative;
+    background-color: transparent;
+    transition: 150ms ease;
+
+}
+
+.navBar ul li:hover .navLink::after{
+    background-color: black;
+}
+
+.navBar a:active .navLink::after{
+    background-color: #333;
+}
+
+.active::after{
+    background-color: black;
+}
+
+.paintingCard {
+    /* display: flex; */
+    padding: 0;
+}
+
+.paintingCard img {
+    max-width: 90vw;
+}
+
+.paintingCardInfo{
+    /* max-width: 50vmin; */
+    /* justify-content: center; */
+    /* align-items: center; */
+
+}
+
