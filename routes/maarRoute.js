@@ -9,6 +9,8 @@ const { loginUser, signupUser } = require("../controllers/authController");
 
 projectRouter.route("/").get(routeControl.getAll).post(routeControl.upload);
 
+projectRouter.route("/allimages").get(routeControl.getAllImages);
+
 projectRouter
   .route("/create")
   .post(upload.single("file"), routeControl.addArtwork);
@@ -29,9 +31,7 @@ projectRouter
   .route("/upload")
   .post(upload.single("file"), routeControl.upload)
   .get((req, res) => {
-    // const images = Image.find({});
     const image = Image.findById(req.query.id);
-
     res.send(
       `data:${image.contentType};base64,${Buffer.from(
         image.data,
@@ -39,8 +39,6 @@ projectRouter
       ).toString("base64")}`
     );
   });
-
-projectRouter.route("/allimages").get(routeControl.getAllImages);
 
 projectRouter.route("/login").post(loginUser);
 projectRouter.route("/signup").post(signupUser);

@@ -29,24 +29,27 @@ const CardComponent = ({ image }) => {
 const Gallery = () => {
     const [artists, setArtists] = useState([]);
 
-    const getAllArtists = () => {
-        const response = axios.get('/project/allimages');
+    const getAllArtists = async () => {
+        const response = await axios.get('project/allimages');
+        console.log(response);
         if (response.data) {
             const { responseArtists } = response.data;
-            for (const artist of responseArtists) {
-                for (let i = 0; i < artist.images.length; i++) {
-                    const image = artist.images[i];
-                    const decodedImage = {
-                        ...image,
-                        data: `data:${image.contentType};base64,${Buffer.from(
-                            image.data,
-                            "base64"
-                        ).toString("base64")}`,
-                    };
-                    artist.images[i] = decodedImage;
+            if (responseArtists) {
+                for (const artist of responseArtists) {
+                    for (let i = 0; i < artist.images.length; i++) {
+                        const image = artist.images[i];
+                        const decodedImage = {
+                            ...image,
+                            data: `data:${image.contentType};base64,${Buffer.from(
+                                image.data,
+                                "base64"
+                            ).toString("base64")}`,
+                        };
+                        artist.images[i] = decodedImage;
+                    }
                 }
+                setArtists(responseArtists);
             }
-            setArtists(responseArtists);
         }
     };
 

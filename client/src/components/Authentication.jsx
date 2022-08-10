@@ -16,7 +16,7 @@ const Authentication = () => {
     AuthenticationState.Login
   );
   const [credentials, setCredentials] = useState({
-    username: "",
+    userName: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -28,22 +28,23 @@ const Authentication = () => {
     sessionStorage.setItem("artist", JSON.stringify(artist));
   };
 
-  const handleSumbit = async () => {
-    console.trace();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (authenticationState === AuthenticationState.Login) {
       const response = await axios.post("project/login", credentials);
-      const { artist } = response.data;
-      storeAuth(artist);
-      navigate("/", { state: { artist } });
+      // const { artist } = response.data;
+      // storeAuth(artist);
+      // navigate("/", { state: { artist } });
     } else {
       const response = await axios.post("project/signup", credentials);
-      const { artist } = response.data;
-      storeAuth(artist);
-      navigate("/", { state: { artist } });
+      // const { artist } = response.data;
+      // storeAuth(artist);
+      // navigate("/", { state: { artist } });
     }
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
     const newCredentials = { ...credentials };
     const { name, value } = e.target;
     newCredentials[name] = value;
@@ -57,7 +58,7 @@ const Authentication = () => {
           <h1>Login</h1>
           <Login
             credentials={credentials}
-            handleOnSubmit={handleSumbit}
+            handleOnSubmit={handleSubmit}
             handleOnChange={handleChange}
           />
         </div>
@@ -66,7 +67,7 @@ const Authentication = () => {
           <h1>Sign Up</h1>
           <Signup
             credentials={credentials}
-            handleOnSubmit={handleSumbit}
+            handleOnSubmit={handleSubmit}
             handleOnChange={handleChange}
           />
         </div>

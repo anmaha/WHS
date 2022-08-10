@@ -13,7 +13,7 @@ const Signup = ({ credentials, handleOnSubmit, handleOnChange }) => {
         />
         <input
           type="text"
-          name="LastName"
+          name="lastName"
           placeholder="Last Name..."
           onChange={handleOnChange}
         />

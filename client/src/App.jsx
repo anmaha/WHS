@@ -19,7 +19,6 @@ function App() {
 
   useEffect(() => {
     getArtist();
-    console.log(artist);
   }, []);
 
   return (
@@ -27,7 +26,6 @@ function App() {
       <div className="canvas">
         <NavBar artist={artist} setArtist={setArtist} />
         <Outlet artist={artist} />
-        {/* <Images artist={artist} /> */}
         <Gallery />
       </div>
     </>

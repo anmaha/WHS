@@ -9,10 +9,6 @@ exports.getAll = async (req, res) => {
     console.log(req.query);
     const artist = await Artist.findOne({ lastName: req.query.lastName });
     res.send(artist);
-    // res.status(200).json({
-    //   status: "success",
-    //   data: { images: Artist.images },
-    // });
   } catch (error) {
     res.status(500).json({
       status: "Error",
@@ -22,6 +18,7 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getAllImages = async (req, res) => {
+  console.log("getAllImages");
   try {
     const artists = await Artist.find({});
     const sanitizedArtists = artists.map((artist) => {
@@ -138,15 +135,12 @@ exports.createNew = async (req, res) => {
       message: error.message,
     });
   }
-};;
+};
 
 exports.getWun = async (req, res) => {
   try {
     const wunArtwork = Artist.findById(req.params.id);
-    res.status(200).json({
-      status: "getWun Success",
-      data: { wunArtwork },
-    });
+    res.status(200).send(wunArtwork);
   } catch (error) {
     res.status(500).json({
       status: "Error getWun",

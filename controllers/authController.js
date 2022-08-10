@@ -1,9 +1,5 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const { Artist } = require("../models/artistModel");
-
-const bcryptValidator = (userPassword, hash) => {
-  return bcrypt.compareSync(userPassword, hash);
-};
 
 const loginUser = async (req, res) => {
   const artist = await Artist.findOne({ lastName: req.body.email });
@@ -35,9 +31,11 @@ const signupUser = async (req, res) => {
     res.status(401).send("User already exists");
     return;
   } else {
+    const salt = await bcrypt.genSalt(10);
+
     const createdArtist = {
       ...req.body,
-      password: await bcrypt.hash(req.body.password, "password"),
+      password: await bcrypt.hash(req.body.password, salt),
     };
     const newArtist = await Artist.create(createdArtist);
     console.log(newArtist);
