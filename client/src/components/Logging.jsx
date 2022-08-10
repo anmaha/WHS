@@ -8,7 +8,7 @@ const Logging = ({ credentials, handleOnSubmit, handleOnChange }) => {
         <input
           type="text"
           name="email"
-          placeholder="Username..."
+          placeholder="Email..."
           value={credentials.email}
           onChange={handleOnChange}
         />

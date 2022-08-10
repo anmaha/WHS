@@ -2,15 +2,20 @@ const bcrypt = require("bcrypt");
 const { Artist } = require("../models/artistModel");
 
 const loginUser = async (req, res) => {
-  const artist = await Artist.findOne({ lastName: req.body.email });
+  const artist = await Artist.findOne({ email: req.body.email });
   if (!artist) {
-    res.status(401).send("Invalid Username or Password!");
+    res.status(401).send("Invalid Email or Password!");
     return;
   } else {
-    req.session.user = artist;
-    artist.isLoggedIn = true;
-    await artist.save();
-    res.send({ artist });
+    const isMatch = bcrypt.compareSync(req.body.password, artist.password);
+    if (isMatch) {
+      req.session.user = artist;
+      artist.isLoggedIn = true;
+      await artist.save();
+      res.send(artist);
+    } else {
+      res.status(401).send("Invalid Email or Password!");
+    }
   }
 };
 
@@ -38,7 +43,6 @@ const signupUser = async (req, res) => {
       password: await bcrypt.hash(req.body.password, salt),
     };
     const newArtist = await Artist.create(createdArtist);
-    console.log(newArtist);
     res.send(newArtist);
   }
 };

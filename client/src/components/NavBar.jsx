@@ -11,19 +11,10 @@ const NavBar = ({ artist, setArtist }) => {
             <ul>
               <li>
                 <NavLink
-                  state={{ artist }}
                   className={(navData) =>
                     navData.isActive ? "active navLink" : "navLink"
                   }
                   to="/"
-                // className={({ isActive }) => {
-                //   isActive ? "navLink active" : "navLink";
-                // }}
-                // className={({ isActive }) => {
-                //   isActive
-                //     ? console.log("is active")
-                //     : console.log("is not active");
-                // }}
                 >
                   Artwork
                 </NavLink>
