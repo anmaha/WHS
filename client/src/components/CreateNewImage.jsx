@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Upload = (props) => {
@@ -7,9 +7,14 @@ const Upload = (props) => {
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
+  useEffect(() => {
+    if (location.state) {
+      const { artist, setArtist } = location.state;
+      console.log(artist);
+    }
+  }, [location]);
+
   const sendFormData = async (e) => {
-    console.log("location", location);
-    console.log("e", e);
     const { artist, setArtist } = location.state;
     const artistId = artist._id;
     const newFormData = new FormData(e.currentTarget);

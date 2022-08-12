@@ -32,14 +32,16 @@ const Authentication = () => {
     e.preventDefault();
     if (authenticationState === AuthenticationState.Login) {
       const response = await axios.post("project/login", credentials);
-      const { artist } = response.data;
+      const artist = response.data;
       storeAuth(artist);
       navigate("/", { state: { artist } });
+      console.log("login success", artist);
     } else {
       const response = await axios.post("project/signup", credentials);
-      const { artist } = response.data;
+      const artist = response.data;
       storeAuth(artist);
       navigate("/", { state: { artist } });
+      console.log("signup success", artist);
     }
   };
 

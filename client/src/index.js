@@ -18,7 +18,6 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          {/* <Route index element={<Images />} /> */}
           <Route path="/addnewart" element={<CreateNewImage />} />
           <Route path="/update" element={<Update />} />
           <Route path="/about" element={<About />} />

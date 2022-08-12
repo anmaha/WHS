@@ -31,7 +31,7 @@ const Gallery = () => {
 
     const getAllArtists = async () => {
         const response = await axios.get('project/allimages');
-        console.log(response);
+        // console.log(response);
         if (response.data) {
             const { responseArtists } = response.data;
             if (responseArtists) {

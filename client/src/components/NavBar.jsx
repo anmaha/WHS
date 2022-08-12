@@ -14,8 +14,8 @@ const NavBar = ({ artist, setArtist }) => {
                   className={(navData) =>
                     navData.isActive ? "active navLink" : "navLink"
                   }
-                  to="/"
-                >
+                  to="/">
+
                   Artwork
                 </NavLink>
               </li>{" "}
