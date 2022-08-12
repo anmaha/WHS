@@ -14,9 +14,17 @@ const NavBar = ({ artist, setArtist }) => {
                   className={(navData) =>
                     navData.isActive ? "active navLink" : "navLink"
                   }
-                  to="/">
-
+                  to="/gallery">
                   Artwork
+                </NavLink>
+              </li>{" "}
+              <li>
+                <NavLink
+                  className={(navData) =>
+                    navData.isActive ? "active navLink" : "navLink"
+                  }
+                  to="/images">
+                  My Gallery
                 </NavLink>
               </li>{" "}
               <li>

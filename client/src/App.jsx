@@ -5,7 +5,6 @@ import Gallery from "./components/Gallery";
 import useGetArtist from "./hooks/useGetArtist";
 
 import "./css/main.css";
-import Images from "./components/Images";
 
 function App() {
   const [artist, setArtist] = useGetArtist();
@@ -15,8 +14,6 @@ function App() {
       <div className="canvas">
         <NavBar artist={artist} setArtist={setArtist} />
         <Outlet artist={artist} />
-        <Gallery />
-        {/* <Images /> */}
       </div>
     </>
   );

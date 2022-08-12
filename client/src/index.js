@@ -11,6 +11,7 @@ import Images from "./components/Images";
 import Music from "./components/Music";
 import Update from "./components/Update";
 import CreateNewImage from "./components/CreateNewImage";
+import Gallery from "./components/Gallery";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,8 @@ root.render(
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/music" element={<Music />} />
+          <Route path="/images" element={<Images />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Route>
       </Routes>
     </BrowserRouter>
