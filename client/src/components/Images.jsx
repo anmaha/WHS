@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Buffer } from "buffer";
 import { useNavigate, useLocation } from "react-router-dom";
+import useGetArtist from "../hooks/useGetArtist";
 
 const CardComponent = ({ image }) => {
   return (
@@ -26,12 +28,24 @@ const CardComponent = ({ image }) => {
   );
 };
 
-const Images = ({ artist }) => {
+const Images = () => {
+  const [artist, setArtist] = useGetArtist();
   const [decodedImages, setDecodedImages] = useState([]);
 
-  const location = useLocation();
-  const navigate = useNavigate();
   const getAllImages = () => {
+    if (artist.images) {
+      for (const image of artist.images) {
+        const decodedImage = {
+          ...image,
+          data: `data:${image.contentType};base64,${Buffer.from(
+            image.data,
+            "base64"
+          ).toString("base64")}`,
+        };
+        setDecodedImages([...decodedImages, decodedImage]);
+      }
+    }
+
     // const { artist } = location.state;
     // const artistId = artist._id;
     // console.log("artist", artist, "artistId", artistId);
@@ -62,7 +76,7 @@ const Images = ({ artist }) => {
 
   useEffect(() => {
     getAllImages();
-    console.log("IN useEffect");
+    console.log(artist);
   }, [artist]);
 
   return (

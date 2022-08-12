@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useLocation, useNavigate } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Buffer } from 'buffer';
 import axios from 'axios';
 
 const CardComponent = ({ image }) => {
@@ -31,25 +32,24 @@ const Gallery = () => {
 
     const getAllArtists = async () => {
         const response = await axios.get('project/allimages');
-        // console.log(response);
+        console.log(response.data);
         if (response.data) {
-            const { responseArtists } = response.data;
-            if (responseArtists) {
-                for (const artist of responseArtists) {
-                    for (let i = 0; i < artist.images.length; i++) {
-                        const image = artist.images[i];
-                        const decodedImage = {
-                            ...image,
-                            data: `data:${image.contentType};base64,${Buffer.from(
-                                image.data,
-                                "base64"
-                            ).toString("base64")}`,
-                        };
-                        artist.images[i] = decodedImage;
-                    }
+            const responseArtists = response.data;
+            console.log("responseArtists", responseArtists);
+            for (const artist of responseArtists) {
+                for (let i = 0; i < artist.images.length; i++) {
+                    const image = artist.images[i];
+                    const decodedImage = {
+                        ...image,
+                        data: `data:${image.contentType};base64,${Buffer.from(
+                            image.data,
+                            "base64"
+                        ).toString("base64")}`,
+                    };
+                    artist.images[i] = decodedImage;
                 }
-                setArtists(responseArtists);
             }
+            setArtists(responseArtists);
         }
     };
 
@@ -59,7 +59,7 @@ const Gallery = () => {
 
     return (
         <>
-            <h1>Paintings</h1>
+            <h1>Gallery</h1>
             {
                 artists && artists.map((artist, index) => (
                     <div key={index}>

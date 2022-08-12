@@ -1,21 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import useGetArtist from "../hooks/useGetArtist";
 
-const Upload = (props) => {
-  const location = useLocation();
-
+const Upload = () => {
+  const [artist, setArtist] = useGetArtist();
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
-  useEffect(() => {
-    if (location.state) {
-      const { artist, setArtist } = location.state;
-      console.log(artist);
-    }
-  }, [location]);
-
   const sendFormData = async (e) => {
-    const { artist, setArtist } = location.state;
     const artistId = artist._id;
     const newFormData = new FormData(e.currentTarget);
     const response = await axios.post(
